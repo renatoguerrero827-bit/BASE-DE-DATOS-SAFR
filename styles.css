@@ -1,0 +1,514 @@
+:root {
+    /* Paleta de Colores Inspirada en el Logo (Azul Marino y Oro/Amarillo) - MODO OSCURO PREMIUM */
+    --primary-color: #0f172a; /* Azul muy oscuro/negro para fondo principal */
+    --primary-hover: #1e293b;
+    --accent-color: #f59e0b; /* Amarillo/Dorado para acentos */
+    
+    --bg-body: #0f172a; /* Fondo oscuro */
+    --bg-card: #0f172a; /* Fondo modal muy oscuro (casi negro) */
+    --bg-input: #1e293b; /* Inputs más claros que el fondo */
+    
+    --text-main: #f8fafc; /* Texto muy claro */
+    --text-muted: #94a3b8; /* Gris azulado */
+    --border-color: #1e293b; /* Bordes sutiles */
+
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6;
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-body);
+    /* Imagen de fondo sutil si se desea */
+    background-image: linear-gradient(to bottom right, #0f172a, #1e293b);
+    color: var(--text-main);
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    line-height: 1.5;
+}
+/* Login Styles */
+.login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-body);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.login-box {
+    background-color: var(--bg-card);
+    padding: 3rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.logo-large {
+    height: 120px;
+    width: auto;
+    margin-bottom: 1.5rem;
+}
+
+.login-box h2 {
+    color: var(--text-main);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.login-box form {
+    text-align: left;
+}
+
+.login-box .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.btn-block {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.error-message {
+    color: var(--danger-color);
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+.user-display {
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1280px;
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Header con Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo {
+    height: 80px; /* Tamaño del logo ajustable */
+    width: auto;
+    object-fit: contain;
+    /* Si el logo es oscuro, invertir colores o añadir brillo si es necesario */
+    /* filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); */ 
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-main); /* Texto claro */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+header h1 i {
+    color: var(--accent-color); /* Icono en color acento */
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+    background-color: var(--accent-color); /* Dorado para acción principal */
+    color: #0f172a; /* Texto oscuro para contraste */
+}
+.btn-primary:hover {
+    background-color: #d97706; /* Dorado más oscuro */
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background-color: #334155; /* Gris oscuro */
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+.btn-secondary:hover {
+    background-color: #475569;
+    border-color: #64748b;
+    color: white;
+}
+
+.btn-danger {
+    background-color: white;
+    border-color: #fca5a5;
+    color: var(--danger-color);
+}
+.btn-danger:hover {
+    background-color: #fef2f2;
+    border-color: var(--danger-color);
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Filtros y Búsqueda */
+.search-bar {
+    display: flex;
+    gap: 1rem;
+    background-color: #334155; /* Fondo más claro que el body */
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.search-bar input {
+    flex: 2;
+    min-width: 200px;
+}
+
+.search-bar select {
+    flex: 1;
+    min-width: 150px;
+}
+
+input, select, textarea {
+    padding: 0.75rem 1rem; /* Más padding para input más robusto */
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md); /* Bordes más redondeados */
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    background-color: var(--bg-input); /* Input más claro */
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background-color: #334155; /* Ligeramente más claro al enfocar */
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.1);
+}
+
+/* Tabla */
+.table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+table th {
+    background-color: #334155;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tr:hover {
+    background-color: #334155;
+}
+
+/* Badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Badge Colores (Estilo "Pill" moderno) */
+.badge-status-activo { background-color: #d1fae5; color: #065f46; }
+.badge-status-pendiente { background-color: #fef3c7; color: #92400e; }
+.badge-status-cerrado { background-color: #f3f4f6; color: #374151; }
+
+.badge-priority-alta { background-color: #fee2e2; color: #b91c1c; }
+.badge-priority-media { background-color: #ffedd5; color: #9a3412; }
+.badge-priority-baja { background-color: #dcfce7; color: #166534; }
+.badge-priority-critica { background-color: #7f1d1d; color: #fef2f2; }
+
+/* Iconos especiales */
+.text-primary { color: var(--primary-color); }
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro */
+    backdrop-filter: blur(4px); /* Efecto blur moderno */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sobreescribir .hidden para display none en otros elementos, pero modal usa opacidad */
+.hidden {
+    display: none !important;
+}
+/* Excepción para modal para permitir transición */
+.modal.hidden {
+    display: flex !important; /* Mantiene layout flex pero oculta con opacidad */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal-content {
+    background-color: var(--bg-card); /* Fondo oscuro */
+    color: var(--text-main);
+    border-radius: var(--radius-lg);
+    width: 95%; /* Ocupa casi todo el ancho disponible */
+    max-width: 1000px; /* Ancho máximo aumentado significativamente */
+    max-height: 95vh; /* Casi toda la altura */
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    padding: 0; /* Padding manejado internamente */
+    border: 1px solid var(--border-color); /* Borde sutil */
+}
+
+.modal:not(.hidden) .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0f172a; /* Header más oscuro */
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-main);
+}
+
+.close-modal {
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+}
+.close-modal:hover {
+    background-color: #334155;
+    color: var(--text-main);
+}
+
+.modal-body {
+    padding: 2rem; /* Más espacio interno */
+}
+
+/* Formularios en Modal */
+.form-group {
+    margin-bottom: 1.5rem; /* Más separación entre campos */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted); /* Color de etiqueta más suave */
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Sección Paciente */
+.patient-section {
+    background-color: transparent; /* Sin fondo, integrado */
+    border: none;
+    padding: 0;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.patient-section h3 {
+    color: var(--accent-color);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color); /* Línea separadora sutil */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.patient-section h4 {
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 1rem 0 0.75rem 0;
+}
+
+/* Footer del Modal */
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+/* Mensaje No Data */
+.no-data {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+    font-style: italic;
+    background-color: #f9fafb;
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .search-bar {
+        flex-direction: column;
+    }
+    
+    .search-bar input, .search-bar select {
+        width: 100%;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .header-actions {
+        width: 100%;
+    }
+    
+    .header-actions .btn {
+        flex: 1;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+table tbody tr {
+    animation: fadeIn 0.3s ease forwards;
+}

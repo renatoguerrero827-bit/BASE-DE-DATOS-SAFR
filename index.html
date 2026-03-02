@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Datos Civil / SAFR</title>
+    <!-- Fuentes Google: Inter para un look moderno -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login -->
+    <div id="loginContainer" class="login-container hidden">
+        <div class="login-box">
+            <img src="safr.png" alt="Logo SAFR" class="logo-large">
+            <h2>Acceso SAFR</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required placeholder="Ej. admin">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+                <div id="loginError" class="error-message hidden">Usuario o contraseña incorrectos</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- App -->
+    <div id="appContainer" class="container hidden">
+        <header>
+            <div class="logo-container">
+                <img src="safr.png" alt="Logo SAFR" class="logo">
+                <h1>BASE DE DATOS SAFR</h1>
+            </div>
+            <div class="header-actions">
+                <span id="currentUserDisplay" class="user-display"></span>
+                <button id="btnLogout" class="btn btn-secondary"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+                <button id="btnExport" class="btn btn-secondary"><i class="fas fa-download"></i> Exportar CSV</button>
+                <button id="btnAdd" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo Registro</button>
+            </div>
+        </header>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Buscar por nombre, ID o descripción...">
+            <select id="filterType">
+                <option value="">Todos los Tipos</option>
+                <option value="Civil">Civil</option>
+                <option value="SAFR">SAFR</option>
+                <option value="Convenio">Convenio</option>
+                <option value="Fiscalización">Fiscalización</option>
+            </select>
+            <select id="filterStatus">
+                <option value="">Todos los Estados</option>
+                <option value="Activo">Activo</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Cerrado">Cerrado</option>
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Realizado por</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Prioridad</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Los datos se cargarán aquí dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="noDataMessage" class="no-data hidden">
+            <p>No hay registros encontrados. Añade uno nuevo.</p>
+        </div>
+    </div>
+
+    <!-- Modal para Añadir/Editar -->
+    <div id="recordModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nuevo Registro</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="recordForm">
+                    <input type="hidden" id="recordId">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="medicName"><i class="fas fa-user-md"></i> Nombre del Médico</label>
+                            <input type="text" id="medicName" required placeholder="Ej. Dr. Martínez" class="input-highlight">
+                        </div>
+                        <div class="form-group" id="patientNameGroup">
+                            <label for="fullName"><i class="fas fa-user"></i> Nombre del Paciente</label>
+                            <input type="text" id="fullName" placeholder="Ej. Juan Pérez">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recordType">Tipo</label>
+                            <select id="recordType" required>
+                                <option value="Civil">Civil</option>
+                                <option value="SAFR">SAFR</option>
+                                <option value="Convenio">Convenio</option>
+                                <option value="Fiscalización">Fiscalización</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="recordDate">Fecha</label>
+                            <input type="date" id="recordDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recordStatus">Estado</label>
+                            <select id="recordStatus" required>
+                                <option value="Activo">Activo</option>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Cerrado">Cerrado</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="priorityGroup">
+                            <label for="recordPriority">Prioridad</label>
+                            <select id="recordPriority">
+                                <option value="Baja">Baja</option>
+                                <option value="Media">Media</option>
+                                <option value="Alta">Alta</option>
+                                <option value="Crítica">Crítica</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Datos del Paciente (Solo visible para Civil) -->
+                    <div id="patientSection" class="patient-section hidden">
+                        <h3><i class="fas fa-user-injured"></i> Información del Paciente</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="patientAge">Edad</label>
+                                <input type="number" id="patientAge" placeholder="Años" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="patientGender">Género</label>
+                                <select id="patientGender">
+                                    <option value="">Seleccionar</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="O">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="chiefComplaint">Sintomas</label>
+                            <input type="text" id="chiefComplaint" placeholder="Ej. Dolor torácico, Caída...">
+                        </div>
+                    </div>
+
+                    <!-- Sección de Datos de Negocio/Local (Solo visible para Convenio/Fiscalización) -->
+                    <div id="businessSection" class="patient-section hidden">
+                        <h3><i class="fas fa-store"></i> Datos del Local / Convenio</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="businessName">Nombre del Local</label>
+                                <input type="text" id="businessName" placeholder="Ej. Vanilla Unicorn">
+                            </div>
+                            <div class="form-group">
+                                <label for="department">Departamento Responsable</label>
+                                <select id="department">
+                                    <option value="">Seleccionar</option>
+                                    <option value="LSFD">LSFD (Bomberos)</option>
+                                    <option value="LSMD">LSMD (Médicos)</option>
+                                    <option value="Ambos">Ambos</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inspectionResult">Resultado / Estado del Convenio</label>
+                            <select id="inspectionResult">
+                                <option value="">Seleccionar</option>
+                                <option value="Aprobado">Aprobado / Vigente</option>
+                                <option value="Rechazado">Rechazado / Vencido</option>
+                                <option value="Pendiente">Pendiente de Revisión</option>
+                                <option value="Con Observaciones">Aprobado con Observaciones</option>
+                            </select>
+                        </div>
+
+                        <!-- Fechas de Convenio (Visible solo si es Convenio) -->
+                        <div id="agreementDates" class="form-row hidden">
+                            <div class="form-group">
+                                <label for="startDate">Fecha Inicio</label>
+                                <input type="date" id="startDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">Fecha Término</label>
+                                <input type="date" id="endDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Descripcion Del Paciente</label>
+                        <textarea id="description" rows="4" placeholder="Detalles del incidente o registro..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
+                        <button type="submit" id="btnSave" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
